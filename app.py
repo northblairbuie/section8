@@ -13,7 +13,8 @@ from resources.store import Store, StoreList
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 #print(os.environ.get('DATABASE_URL'))
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(['DATABASE_URL'])#, 'sqlite:///data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://vfgnbwvafppghc:743e5c22d0456d0bf6fc5893f859aec1f0c3cb0d6f07e49e655ecb559b0d6287@ec2-54-73-147-133.eu-west-1.compute.amazonaws.com:5432/d44jn1bop0445j'
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(['DATABASE_URL'])#, 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # turns off flask sqlalchemy mod tracking
 app.secret_key = 'jose'
 api = Api(app)
