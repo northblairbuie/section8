@@ -1,4 +1,5 @@
 import os
+import re
 
 from db import db
 from flask import Flask
@@ -10,14 +11,15 @@ from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
+
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-print("--------")
-print(os.environ.get('DATABASE_URL'))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://vfgnbwvafppghc:743e5c22d0456d0bf6fc5893f859aec1f0c3cb0d6f07e49e655ecb559b0d6287@ec2-54-73-147-133.eu-west-1.compute.amazonaws.com:5432/d44jn1bop0445j'
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(['DATABASE_URL'])#, 'sqlite:///data.db')
-print(app.config['SQLALCHEMY_DATABASE_URI'])
-print("--------")
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # turns off flask sqlalchemy mod tracking
